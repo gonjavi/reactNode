@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import { addToCart } from '../actions/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { removeFromCart } from '../actions/cartAction';
 
 function CartScreen(props) {
   const cart = useSelector(state => state.cart);
@@ -9,6 +11,10 @@ function CartScreen(props) {
   const productId = props.match.params.id;
   const qty = props.location.search? Number(props.location.search.split("=")[1]) : 1;
   const dispatch = useDispatch();
+
+  const removeFromCartHandler = productId => {
+    dispatch(removeFromCart(productId));
+  }
 
   useEffect(() => {
     if (productId) {
@@ -35,11 +41,17 @@ function CartScreen(props) {
             </div>
             :
             cartItems.map(item => 
-              <div>
-                <img src={item.image} alt="product" />
+              <li>
+                <div className="cart-image">
+                  <img src={item.image} alt="product" />
+                </div>
+                
                 <div className="cart-name">
                   <div>
-                    {item.name}
+                    <Link to={"/product/" + item.product }>
+                      {item.name}
+                    </Link>
+                    
                   </div>
                   <div>
                     Qty:
@@ -48,12 +60,15 @@ function CartScreen(props) {
                       <option value="2">2</option>
                       <option value="3">3</option>
                     </select>
+                    <button type="button" className="button" onClick={() => removeFromCartHandler(item.product)}>
+                      Delete
+                    </button>
                   </div>
                 </div>
-                <div>
-                  {item.price}
+                <div className="cart-price">
+                  ${item.price}
                 </div>
-              </div>)
+              </li>)
           }
 
         </ul>
