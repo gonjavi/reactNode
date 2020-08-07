@@ -1,38 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { listProducts } from '../actions/productActions';
+import { useSelector, useDispatch } from 'react-redux';
 
 function HomeScreen(props) {
-  const [products, setProducts] = useState([]);
+  const productList = useSelector(state => state.productList);
+  const { products, loading, error } = productList;
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
+    dispatch(listProducts());
+    return () => {
+
     }
-    fetchData();
-  })
+    
+  }, [])
   
   return (
+    loading? <div> Loading...</div> :
+    error? <div>{error}</div>:
     <ul className="products">
-            {
-              products.map(product =>           
-              <li key={product.id}>
-                <div className="product">
-                  <Link to={'product/'+ product.id}>
-                    <img className="product-image" src={product.image} alt="product" />
-                  </Link>
-                  <div className="product-name">
-                    
-                  </div>
-                  <div className="product-brand">{product.brand}</div>
-                  <div className="product-price">{product.price}</div>
-                  <div className="product-rating">{product.rating} Stars ({product.numReviews} reviews)</div>
-                </div>
-              </li>)
-            }
-            
-          </ul>
+      {
+        products.map(product =>           
+        <li key={product.id}>
+          <div className="product">
+            <Link to={'product/'+ product.id}>
+              <img className="product-image" src={product.image} alt="product" />
+            </Link>
+            <div className="product-name">
+              
+            </div>
+            <div className="product-brand">{product.brand}</div>
+            <div className="product-price">{product.price}</div>
+            <div className="product-rating">{product.rating} Stars ({product.numReviews} reviews)</div>
+          </div>
+        </li>)
+      }      
+    </ul>
   )
 }
 
