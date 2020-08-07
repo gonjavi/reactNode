@@ -16,6 +16,9 @@ function ProductScreen(props) {
     }
   }, []); //  [] dispatch will run ufter component Didmount
 
+  const handleAddToCart = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+  }
 
   return (
   <div>
@@ -54,17 +57,20 @@ function ProductScreen(props) {
                   Price: <b>${product.price} </b>
                 </li>
                 <li>
-                  Status: {product.status}
+                  Status: { product.countInStock > 0 ? "In Stock" : "Out of Stock"  }
                 </li>
                 <li>
                   Qty: <select value={qty} onChange={(e) => { setQty(e.target.value) }} >
                     {[...Array(product.countInStock).keys()].map(x => 
-                      <option value={x+1}>{x+1}</option>
+                      <option key={x+1} value={x+1}>{x+1}</option>
                     )}
                   </select>
                 </li>
                 <li>
-                  <button className="button">Add to Cart</button>
+                  { product.countInStock > 0 && 
+                    <button onClick={handleAddToCart} className="button">Add to Cart</button>
+                    
+                  }
                 </li>
               </ul>
             </div>
