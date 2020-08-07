@@ -8,7 +8,8 @@ export default {
       price: 55,
       brand: 'nike',
       rating: 4.5,
-      numReviews: 10
+      numReviews: 10,
+      countInStock: 6,
     },
     {
       id: '2',
@@ -18,7 +19,7 @@ export default {
       price: 75,
       brand: 'nike',
       rating: 4.5,
-      numReviews: 10
+      numReviews: 6
     },
     {
       id: '3',
@@ -28,7 +29,8 @@ export default {
       price: 65,
       brand: 'nike',
       rating: 4.5,
-      numReviews: 10
+      numReviews: 10,
+      countInStock: 4,
     },
     {
       id: '4',
@@ -38,7 +40,8 @@ export default {
       price: 40,
       brand: 'nike',
       rating: 4.5,
-      numReviews: 10
+      numReviews: 10,
+      countInStock: 3,
     },
     {
       id: '5',
@@ -48,7 +51,8 @@ export default {
       price: 65,
       brand: 'nike',
       rating: 4.5,
-      numReviews: 10
+      numReviews: 10,
+      countInStock: 2,
     },
     {
       id: '6',
@@ -58,7 +62,7 @@ export default {
       price: 40,
       brand: 'nike',
       rating: 4.5,
-      numReviews: 10
+      countInStock: 6,
     }
   ]
 }

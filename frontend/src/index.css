@@ -198,3 +198,22 @@ a:hover {
 .button,primary {
   background-color: #f0c040;
 }
+
+/* cart */
+
+.cart {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  align-items: flex-start;
+}
+
+.cart-list {
+  flex: 3 1 60rem;
+}
+.cart-action {
+  flex: 1 1 20rem;
+  background-color: #f8f8f8;
+  border-radius: .5rem;
+  padding: 1rem;
+}
