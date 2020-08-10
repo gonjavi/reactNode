@@ -3,6 +3,7 @@ import data from './data';
 import dotenv from 'dotenv';
 import config from './config';
 import moongose from 'mongoose';
+import bodyparser from 'body-parser';
 import userRoute from './routes/userRoute';
 
 dotenv.config();
@@ -15,7 +16,7 @@ moongose.connect(mongodbUrl, {
 }).catch(error => console.log(error.reason));
 
 const app = express();
-
+app.use(bodyparser.json());
 app.use("/api/users", userRoute);
 app.get("/api/products/:id", (req, res) => {   
   const productId = req.params.id;
