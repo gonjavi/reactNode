@@ -11,9 +11,7 @@ function ProductsScreen(props) {
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
-  const [rating, setRating] = useState('');
-  const [numReview, setNumReview] = useState('');
- 
+  
   const productSave = useSelector(state => state.productSave);
   const { loading: loadingSave, succes: successSave, error: errorSave } = productSave;
 
@@ -30,7 +28,7 @@ function ProductsScreen(props) {
     e.preventDefault();
     dispatch(saveProduct({
       name, price, image, brand, category,
-      countInStock, description, rating, numReview
+      countInStock, description
     }));
   }
 
@@ -81,19 +79,7 @@ function ProductsScreen(props) {
             Count in Stock
           </label>
           <input type="text" name="countInStock" id="countInStock" onChange={(e) => setCountInStock(e.target.value)} />
-        </li>
-        <li>
-          <label htmlFor="rating">
-            Rating
-          </label>
-          <input type="text" name="rating" id="rating" onChange={(e) => setRating(e.target.value)} />
-        </li>
-        <li>
-          <label htmlFor="price">
-            numReviews
-          </label>
-          <input type="text" name="price" id="price" onChange={(e) => setNumReview(e.target.value)} />
-        </li>
+        </li>        
         <li>
           <label htmlFor="name">
             Description
