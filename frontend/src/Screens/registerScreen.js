@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { signin } from '../actions/userActions';
+import { register } from '../actions/userActions';
 
-function SigninScreen(props) {
+function RegisterScreen(props) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const userSignin = useSelector(state => state.userSignin);
-  const { loading, userInfo, error } = userSignin;
+  const [rePassword, setRePassword] = useState('');
+  const userRegister = useSelector(state => state.userRegister);
+  const { loading, userInfo, error } = userRegister;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(userInfo)
     if (userInfo) {
       props.history.push("/");
 
@@ -24,7 +25,7 @@ function SigninScreen(props) {
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    dispatch(register(name, email, password));
   }
 
  
@@ -33,11 +34,17 @@ function SigninScreen(props) {
     <form onSubmit={submitHandler}>
       <ul className="form-container">
         <li>
-          <h2>Sign-In</h2>
+          <h2>Creata an Account</h2>
         </li>
         <li>
           {loading && <div>Loading...</div>}
           {error && <div>{error}</div>}
+        </li>
+        <li>
+          <label htmlFor="name">
+            Name
+          </label>
+          <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)} />
         </li>
         <li>
           <label htmlFor="email">
@@ -50,18 +57,19 @@ function SigninScreen(props) {
           <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
         </li>
         <li>
-          <button type="submit" className="button primary">Signin</button>
+          <label htmlFor="rePassword">Re-Enter Password</label>
+          <input type="rePassword" name="rePassword" id="rePassword" onChange={(e) => setRePassword(e.target.value)} />
         </li>
         <li>
-          New to Amazona?
+          <button type="submit" className="button primary">Register</button>
         </li>
         <li>
-          <Link to="/register" className="button secondary text-center">Create your Amazona Account</Link>
-        </li>
+          Already have an account? <Link to="/signin">Sign-in</Link>
+        </li>        
       </ul>
     </form>
    
   </div>);
 }
 
-export default SigninScreen;
+export default RegisterScreen;
