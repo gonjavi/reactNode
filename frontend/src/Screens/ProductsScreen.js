@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { signin } from '../actions/userActions';
-import productModel from '../../../backend/models/productModel';
+import { saveProduct } from '../actions/productActions';
 
 function ProductsScreen(props) {
   const [name, setName] = useState('');
@@ -13,7 +12,7 @@ function ProductsScreen(props) {
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState('');
-  const [numReview, setnumReview] = useState('');
+  const [numReview, setNumReview] = useState('');
  
   const productSave = useSelector(state => state.productSave);
   const { loading: loadingSave, succes: successSave, error: errorSave } = productSave;
@@ -25,7 +24,7 @@ function ProductsScreen(props) {
     return () => {
 
     }
-  }, [userInfo]);
+  }, []);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -44,8 +43,8 @@ function ProductsScreen(props) {
           <h2>Create Product</h2>
         </li>
         <li>
-          {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>}
+          {loadingSave && <div>Loading...</div>}
+          {errorSave && <div>{errorSave}</div>}
         </li>
         <li>
           <label htmlFor="name">
@@ -93,7 +92,7 @@ function ProductsScreen(props) {
           <label htmlFor="price">
             numReviews
           </label>
-          <input type="text" name="price" id="price" onChange={(e) => setPrice(e.target.value)} />
+          <input type="text" name="price" id="price" onChange={(e) => setNumReview(e.target.value)} />
         </li>
         <li>
           <label htmlFor="name">
