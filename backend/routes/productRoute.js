@@ -9,7 +9,7 @@ router.get('/', async(req, res) => {
   res.send(products)
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async(req, res) => {
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
   return res.status(500).send({message: 'Error creating product.'});
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async(req, res) => {
   const productId = req.params.id;
   const product = await Product.findById(productId);
   if (product) {   
@@ -43,6 +43,16 @@ router.put("/:id", async (req, res) => {
     }
   } 
   return res.status(500).send({message: 'Error updating product.'});
+});
+
+router.delete("/:id", async(req, res) => {
+  const deletedProduct = await Product.findById(req.params.id);
+  if (deletedProduct) {
+    await deletedProduct.remove();
+    res.send({message: "Product deleted"});
+  } else {
+    res.send("Error deliting");
+  }
 });
 
 export default router;
