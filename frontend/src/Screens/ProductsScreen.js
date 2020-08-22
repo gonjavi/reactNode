@@ -5,7 +5,7 @@ import { saveProduct, listProducts } from '../actions/productActions';
 
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [_id, setId] = useState('');
+  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
@@ -41,7 +41,7 @@ function ProductsScreen(props) {
   const submitHandler = e => {
     e.preventDefault();
     dispatch(saveProduct({
-      _id: _id,
+      _id: id,
       name, price, image, brand, category,
       countInStock, description
     }));
@@ -109,10 +109,10 @@ function ProductsScreen(props) {
             </li>
           
             <li>
-              <button type="submit" className="button primary">{_id?"Update":"Create"}</button>
+              <button type="submit" className="button primary">{id?"Update":"Create"}</button>
             </li> 
             <li>
-              <button type="submit" onClick={() => setModalVisible(false)} className="button secondary">Back</button>
+              <button type="button" onClick={() => setModalVisible(false)} className="button secondary">Back</button>
             </li>         
           </ul>
         </form>

@@ -53,5 +53,5 @@ function productSaveReducer(state= { product: {} }, action) {
 export { 
   productListReducer,
   productDetailsReducer,
-  productSaveReducer
+  productSaveReducer,
 }
