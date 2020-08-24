@@ -9,6 +9,16 @@ router.get('/', async(req, res) => {
   res.send(products)
 });
 
+router.get('/:id', async(req, res) => {
+  const products = await Product.findOne({_id: req.params.id});
+  if (product) {
+    res.send(products);
+  } else {
+    res.status(404).send({message: ""})
+  }
+  
+});
+
 router.post("/", isAuth, isAdmin, async(req, res) => {
   const product = new Product({
     name: req.body.name,
