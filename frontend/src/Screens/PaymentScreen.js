@@ -5,7 +5,7 @@ import { savePayment } from '../actions/cartAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 function PaymentScreen(props) {
- const [paymentMethod, setPaymentMethod] = useState('');
+ const [paymentMethod, setPaymentMethod] = useState(''); 
 
   const dispatch = useDispatch();
 
@@ -33,25 +33,7 @@ function PaymentScreen(props) {
               </label>
              
             </li>
-            <li>
-              <label htmlFor="city">
-              City
-              </label>
-              <input type="text" name="city" id="city" onChange={(e) => setCity(e.target.value)} />
-            </li>
-            <li>
-              <label htmlFor="postalCode">
-                Postal code
-              </label>
-              <input type="text" name="postalCode" id="postalCode" onChange={(e) => setPostalCode(e.target.value)} />
-            </li>
-            <li>
-              <label htmlFor="country">
-              Country
-              </label>
-              <input type="text" name="country" id="country" onChange={(e) => setCountry(e.target.value)} />
-            </li>
-            
+           
             <li>
               <button type="submit" className="button primary">Continue</button>
             </li>
