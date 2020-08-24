@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveShipping } from '../actions/cartAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 
-function ShippingScreen(props) {
+function PaymentScreen(props) {
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');
@@ -65,4 +65,4 @@ function ShippingScreen(props) {
   );
 }
 
-export default ShippingScreen;
+export default PaymentScreen;
