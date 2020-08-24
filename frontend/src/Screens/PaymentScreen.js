@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveShipping } from '../actions/cartAction';
+import { savePayment } from '../actions/cartAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 function PaymentScreen(props) {
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [country, setCountry] = useState('');
+ const [paymentMethod, setPaymentMethod] = useState('');
 
   const dispatch = useDispatch();
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(saveShipping(address, city, postalCode, country));
-    props.history.push('payment');
+    dispatch(savePayment({paymentMethod}));
+    props.history.push('placeorder');
   }
 
  
   return (
     <div>
-      <CheckoutSteps step1 step2></CheckoutSteps>
+      <CheckoutSteps step1 step2 step3></CheckoutSteps>
 
       <div className="form">
         <form onSubmit={submitHandler}>
           <ul className="form-container">
             <li>
-              <h2>Shipping</h2>
+              <h2>Payment</h2>
             </li>       
             <li>
+            <input type="radio" name="paymentMethod" id="paymentMethod" value="paypal" onChange={(e) => setPaymentMethod(e.target.value)} />
               <label htmlFor="address">
-                Address
+                Paypal
               </label>
-              <input type="text" name="address" id="address" onChange={(e) => setAddress(e.target.value)} />
+             
             </li>
             <li>
               <label htmlFor="city">
